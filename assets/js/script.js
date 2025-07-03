@@ -1,5 +1,21 @@
-// Dados fictícios para os bairros de Londrina
-const neighborhoods = [
+/**
+ * ECO SOCIAL - SCRIPT UNIFICADO
+ * 
+ * Este script contém todas as funcionalidades necessárias para:
+ * - Feed de postagens sustentáveis
+ * - Chat com o EcoBot
+ * - Sistema de ranking de bairros
+ * - Menus responsivos (mobile e desktop)
+ * - Mapa de localização
+ * - Animações e interações
+ */
+
+// =============================================
+// CONSTANTES E CONFIGURAÇÕES GLOBAIS
+// =============================================
+
+// Dados dos bairros (pode ser substituído por API real posteriormente)
+const NEIGHBORHOODS_DATA = [
     { name: "Centro", points: 1850 },
     { name: "Jardim Igapó", points: 1420 },
     { name: "Vila Brasil", points: 1210 },
@@ -12,7 +28,28 @@ const neighborhoods = [
     { name: "Jardim Leonor", points: 480 }
 ];
 
-// Simulação de postagens
+// Respostas pré-definidas do EcoBot
+const ECOBOT_RESPONSES = {
+    "coleta": "🗓️ Coleta seletiva no Centro: Segundas e Quartas às 14h\nJardim Igapó: Terças e Quintas às 10h\nVila Brasil: Quartas e Sextas às 13h",
+    "reciclar": "♻️ Para reciclar plástico:\n1. Lave as embalagens para remover resíduos\n2. Remova rótulos e tampas quando possível\n3. Separe por tipo (PET, PEAD, PVC, etc.)\n4. Leve ao ecoponto mais próximo",
+    "dicas": "🌿 Dicas sustentáveis:\n1. Use ecobags em vez de sacolas plásticas\n2. Feche a torneira ao escovar os dentes\n3. Prefira transporte sustentável (bicicleta, caminhada)\n4. Separe seu lixo para reciclagem\n5. Conserte em vez de descartar",
+    "óleo": "⚠️ Nunca descarte óleo na pia! Isso contamina a água.\nLeve seu óleo usado a um ecoponto. Em Londrina, você pode levar ao:\n- Ecoponto Centro: Rua São Paulo, 500\n- Ecoponto Vila Brasil: Av. Rio de Janeiro, 1200",
+    "compostagem": "🥗 Para fazer compostagem:\n1. Separe resíduos orgânicos (cascas, folhas, restos de vegetais)\n2. Monte uma composteira com baldes ou caixas\n3. Intercale camadas de material úmido e seco\n4. Revire a cada 3 dias\nEm 2-3 meses terá adubo de qualidade!",
+    "default": "Desculpe, não entendi. Tente perguntar sobre 'coleta', 'reciclagem', 'dicas sustentáveis' ou 'descarte de óleo'!"
+};
+
+// Configurações do Intersection Observer para animações
+const OBSERVER_OPTIONS = {
+    threshold: 0.1
+};
+
+// =============================================
+// FUNÇÕES DE GERENCIAMENTO DE POSTAGENS
+// =============================================
+
+/**
+ * Simula a criação de uma nova postagem sustentável
+ */
 function simulatePost() {
     const actionSelect = document.getElementById('action-type');
     const neighborhoodSelect = document.getElementById('neighborhood');
@@ -46,11 +83,11 @@ function simulatePost() {
         document.getElementById('feed-posts').insertAdjacentHTML('afterbegin', postHTML);
     }
     
-    // Atualizar ranking (simulação)
-    const neighborhoodIndex = neighborhoods.findIndex(n => n.name === neighborhood);
+    // Atualiza o ranking do bairro
+    const neighborhoodIndex = NEIGHBORHOODS_DATA.findIndex(n => n.name === neighborhood);
     if (neighborhoodIndex !== -1) {
-        neighborhoods[neighborhoodIndex].points += points;
-        if (typeof updateRanking === 'function') updateRanking();
+        NEIGHBORHOODS_DATA[neighborhoodIndex].points += points;
+        updateRanking();
     }
     
     // Feedback visual
@@ -66,16 +103,14 @@ function simulatePost() {
     }
 }
 
-// Funções do 
-const responses = {
-    "coleta": "🗓️ Coleta seletiva no Centro: Segundas e Quartas às 14h\nJardim Igapó: Terças e Quintas às 10h\nVila Brasil: Quartas e Sextas às 13h",
-    "reciclar": "♻️ Para reciclar plástico:\n1. Lave as embalagens para remover resíduos\n2. Remova rótulos e tampas quando possível\n3. Separe por tipo (PET, PEAD, PVC, etc.)\n4. Leve ao ecoponto mais próximo",
-    "dicas": "🌿 Dicas sustentáveis:\n1. Use ecobags em vez de sacolas plásticas\n2. Feche a torneira ao escovar os dentes\n3. Prefira transporte sustentável (bicicleta, caminhada)\n4. Separe seu lixo para reciclagem\n5. Conserte em vez de descartar",
-    "óleo": "⚠️ Nunca descarte óleo na pia! Isso contamina a água.\nLeve seu óleo usado a um ecoponto. Em Londrina, você pode levar ao:\n- Ecoponto Centro: Rua São Paulo, 500\n- Ecoponto Vila Brasil: Av. Rio de Janeiro, 1200",
-    "compostagem": "🥗 Para fazer compostagem:\n1. Separe resíduos orgânicos (cascas, folhas, restos de vegetais)\n2. Monte uma composteira com baldes ou caixas\n3. Intercale camadas de material úmido e seco\n4. Revire a cada 3 dias\nEm 2-3 meses terá adubo de qualidade!",
-    "default": "Desculpe, não entendi. Tente perguntar sobre 'coleta', 'reciclagem', 'dicas sustentáveis' ou 'descarte de óleo'!"
-};
+// =============================================
+// FUNÇÕES DO ECOBOT (CHAT)
+// =============================================
 
+/**
+ * Envia uma mensagem rápida pré-definida para o EcoBot
+ * @param {string} text - Texto da mensagem rápida
+ */
 function sendQuickMessage(text) {
     if(document.getElementById('user-input')) {
         document.getElementById('user-input').value = text;
@@ -83,6 +118,9 @@ function sendQuickMessage(text) {
     }
 }
 
+/**
+ * Processa e envia a mensagem do usuário para o EcoBot
+ */
 function sendUserMessage() {
     const input = document.getElementById('user-input');
     if(!input) return;
@@ -92,45 +130,42 @@ function sendUserMessage() {
     
     const chatMessages = document.getElementById('chat-messages');
     
-    // Adicionar mensagem do usuário
+    // Adiciona mensagem do usuário
     chatMessages.innerHTML += `<div class="message user">${text}</div>`;
     
-    // Processar resposta
-    let response = responses.default;
+    // Processa a resposta
+    let response = ECOBOT_RESPONSES.default;
     const lowerInput = text.toLowerCase();
     
-    if (lowerInput.includes("coleta")) response = responses.coleta;
-    if (lowerInput.includes("recicla")) response = responses.reciclar;
-    if (lowerInput.includes("dica") || lowerInput.includes("sustentável")) response = responses.dicas;
-    if (lowerInput.includes("óleo")) response = responses.óleo;
-    if (lowerInput.includes("compostagem")) response = responses.compostagem;
+    if (lowerInput.includes("coleta")) response = ECOBOT_RESPONSES.coleta;
+    if (lowerInput.includes("recicla")) response = ECOBOT_RESPONSES.reciclar;
+    if (lowerInput.includes("dica") || lowerInput.includes("sustentável")) response = ECOBOT_RESPONSES.dicas;
+    if (lowerInput.includes("óleo")) response = ECOBOT_RESPONSES.óleo;
+    if (lowerInput.includes("compostagem")) response = ECOBOT_RESPONSES.compostagem;
     
-    // Adicionar resposta do bot
+    // Adiciona resposta do bot após um pequeno delay
     setTimeout(() => {
         chatMessages.innerHTML += `<div class="message bot">${response}</div>`;
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }, 500);
     
-    // Limpar input
+    // Limpa o input
     input.value = '';
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-// Permitir enviar com Enter
-if (document.getElementById('user-input')) {
-    document.getElementById('user-input').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            sendUserMessage();
-        }
-    });
-}
+// =============================================
+// FUNÇÕES DE RANKING
+// =============================================
 
-// Atualizar ranking
+/**
+ * Atualiza a lista de classificação dos bairros
+ */
 function updateRanking() {
-    // Ordenar bairros por pontos
-    const sortedNeighborhoods = [...neighborhoods].sort((a, b) => b.points - a.points);
+    // Ordena bairros por pontos
+    const sortedNeighborhoods = [...NEIGHBORHOODS_DATA].sort((a, b) => b.points - a.points);
     
-    // Atualizar lista de classificação
+    // Gera o HTML do ranking
     let rankingHTML = '';
     sortedNeighborhoods.forEach((neighborhood, index) => {
         rankingHTML += `
@@ -144,27 +179,32 @@ function updateRanking() {
         `;
     });
     
+    // Atualiza a página
     if (document.getElementById('neighborhood-rank')) {
         document.getElementById('neighborhood-rank').innerHTML = rankingHTML;
     }
     
-    // Atualizar gráfico
+    // Atualiza o gráfico se existir
     if (document.getElementById('ranking-chart')) {
         updateChart();
     }
 }
 
-// Atualizar gráfico de ranking
+/**
+ * Atualiza o gráfico de ranking
+ */
 function updateChart() {
-    const sortedNeighborhoods = [...neighborhoods].sort((a, b) => b.points - a.points);
+    const sortedNeighborhoods = [...NEIGHBORHOODS_DATA].sort((a, b) => b.points - a.points);
     const topNeighborhoods = sortedNeighborhoods.slice(0, 5);
     
     const ctx = document.getElementById('ranking-chart').getContext('2d');
     
+    // Destrói o gráfico anterior se existir
     if (window.rankingChart) {
         window.rankingChart.destroy();
     }
     
+    // Cria novo gráfico
     window.rankingChart = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -221,82 +261,190 @@ function updateChart() {
     });
 }
 
-// Inicializar a página
-function init() {
-    // Adicionar funcionalidade de curtir
-    document.addEventListener('click', function(e) {
-        if (e.target.closest('.like-btn')) {
-            const btn = e.target.closest('.like-btn');
-            if (btn.innerHTML.includes('fas fa-heart')) {
-                btn.innerHTML = '<i class="fas fa-heart" style="color: var(--accent2);"></i>';
-            } else {
-                btn.innerHTML = '<i class="fas fa-heart"></i>';
-            }
-        }
-    });
+// =============================================
+// FUNÇÕES DE MENU E NAVEGAÇÃO
+// =============================================
+
+/**
+ * Configura o menu hamburguer para mobile
+ */
+function setupMobileMenu() {
+    const menuButton = document.getElementById('mobile-menu-button');
+    const menu = document.getElementById('mobile-menu');
     
-    // Inicializar funcionalidades específicas de cada página
-    if (document.getElementById('feed-posts')) {
-        // Gerar algumas postagens iniciais
-        const initialPosts = [
-            { user: "Mariana Costa", neighborhood: "Centro", action: "♻️ Reciclagem (1kg = 10 pontos)", points: 10 },
-            { user: "Pedro Santos", neighborhood: "Jardim Igapó", action: "🚲 Transporte sustentável (5km = 15 pontos)", points: 15 },
-            { user: "Ana Silva", neighborhood: "Vila Brasil", action: "🌳 Plantio de árvore (1 árvore = 50 pontos)", points: 50 }
-        ];
+    if (menuButton && menu) {
+        menuButton.addEventListener('click', function() {
+            menu.classList.toggle('hidden');
+        });
+    }
+}
+
+/**
+ * Configura o menu dropdown para desktop
+ */
+function setupDesktopMenu() {
+    const menuButton = document.getElementById('desktop-menu-button');
+    const menu = document.getElementById('desktop-menu');
+    
+    if (menuButton && menu) {
+        menuButton.addEventListener('click', function() {
+            menu.classList.toggle('hidden');
+        });
         
-        initialPosts.forEach(post => {
-            document.getElementById('feed-posts').innerHTML += `
-                <div class="post">
-                    <div class="post-header">
-                        <div class="user-avatar">${post.user.charAt(0)}</div>
-                        <div>
-                            <div>${post.user}</div>
-                            <div style="font-size: 0.8rem; color: var(--accent1);">${post.neighborhood}</div>
-                        </div>
-                    </div>
-                    <div class="post-content">
-                        ${post.action}
-                    </div>
-                    <div class="post-footer">
-                        <div class="post-points">+${post.points} pontos</div>
-                        <button class="like-btn"><i class="fas fa-heart"></i></button>
-                    </div>
-                </div>
-            `;
-        });
-    }
-    
-    if (document.getElementById('neighborhood-rank')) {
-        updateRanking();
-    }
-}
-
-// Inicializar quando o documento estiver carregado
-document.addEventListener('DOMContentLoaded', init);
-
-// Menu hambúrguer responsivo
-function setupHamburgerMenu() {
-    const hamburger = document.querySelector('.hamburger');
-    const menu = document.querySelector('.fake-menu');
-    if (hamburger && menu) {
-        hamburger.addEventListener('click', function() {
-            menu.classList.toggle('open');
-        });
         // Fecha o menu ao clicar fora
-        document.addEventListener('click', function(e) {
-            if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
-                menu.classList.remove('open');
+        document.addEventListener('click', function(event) {
+            if (!menu.contains(event.target) && !menuButton.contains(event.target)) {
+                menu.classList.add('hidden');
             }
         });
     }
 }
 
+/**
+ * Configura a navegação suave para âncoras
+ */
+function setupSmoothScrolling() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                // Fecha o menu mobile se estiver aberto
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+                
+                // Rolagem suave
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
+
+// =============================================
+// FUNÇÕES DE MAPA E LOCALIZAÇÃO
+// =============================================
+
+let map; // Variável global para o mapa
+
+/**
+ * Ativa a localização e exibe o mapa
+ */
+function activateLocation() {
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+                
+                // Configura o container do mapa
+                const mapContainer = document.getElementById('map-container');
+                mapContainer.innerHTML = '';
+                mapContainer.style.padding = '0';
+                
+                // Cria o mapa com Leaflet
+                map = L.map('map-container').setView([latitude, longitude], 15);
+                
+                // Adiciona camada do mapa
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+                
+                // Adiciona marcador da localização
+                L.marker([latitude, longitude], {
+                    title: "Sua localização",
+                    alt: "Sua localização",
+                    riseOnHover: true
+                }).addTo(map)
+                .bindPopup("Você está aqui!")
+                .openPopup();
+                
+                // Adiciona círculo de precisão
+                L.circle([latitude, longitude], {
+                    color: 'green',
+                    fillColor: '#00FF00',
+                    fillOpacity: 0.35,
+                    radius: position.coords.accuracy
+                }).addTo(map);
+
+                // Exemplo: Adiciona ponto de coleta seletiva
+                L.marker([latitude + 0.001, longitude + 0.003], { 
+                    icon: L.divIcon({ 
+                        html: '<i class="fas fa-recycle" style="color: blue; font-size: 24px;"></i>', 
+                        className: 'custom-icon' 
+                    }) 
+                }).addTo(map)
+                .bindPopup("Ponto de coleta seletiva");
+            },
+            function(error) {
+                let errorMessage;
+                switch(error.code) {
+                    case error.PERMISSION_DENIED:
+                        errorMessage = "Permissão de localização negada. Por favor, ative a localização para usar este recurso.";
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        errorMessage = "As informações de localização não estão disponíveis.";
+                        break;
+                    case error.TIMEOUT:
+                        errorMessage = "A solicitação de localização expirou.";
+                        break;
+                    case error.UNKNOWN_ERROR:
+                        errorMessage = "Ocorreu um erro desconhecido ao obter a localização.";
+                        break;
+                }
+                alert(errorMessage);
+            },
+            {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0
+            }
+        );
+    } else {
+        alert("Seu navegador não suporta geolocalização. Por favor, atualize ou use outro navegador.");
+    }
+}
+
+// =============================================
+// FUNÇÕES DE ANIMAÇÃO E INTERAÇÃO
+// =============================================
+
+/**
+ * Configura o Intersection Observer para animações
+ */
+function setupAnimations() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-fadeIn');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, OBSERVER_OPTIONS);
+
+    // Observa elementos que devem ser animados
+    document.querySelectorAll('.feature-card, .badge-icon, .post, .rank-item, .metric-card').forEach(el => {
+        observer.observe(el);
+    });
+}
+
+/**
+ * Configura o comportamento do EcoBot (avatar animado)
+ */
 let ecoLoopActive = true;
 
 function ecoWelcomeLoop() {
     if (!ecoLoopActive) return;
     const avatar = document.getElementById('eco-avatar');
     if (!avatar) return;
+    
     avatar.src = 'assets/Images/agente/1-sorrindo.png';
     setTimeout(() => {
         avatar.src = 'assets/Images/agente/2-piscando.png';
@@ -310,6 +458,7 @@ function ecoWelcomeLoop() {
 function ecoWelcomeAndChat() {
     ecoLoopActive = true;
     ecoWelcomeLoop();
+    
     // Após 4s, inicia a conversa
     setTimeout(() => {
         ecoLoopActive = false;
@@ -321,7 +470,7 @@ function ecoAskQuestion() {
     const avatar = document.getElementById('eco-avatar');
     const chatMessages = document.getElementById('chat-messages');
     if (!avatar || !chatMessages) return;
-    // Pergunta de complexidade média
+    
     const perguntas = [
         'Você sabia que separar resíduos orgânicos pode reduzir em até 50% o lixo enviado aos aterros? Como você faz a separação na sua casa?',
         'Qual ação sustentável você acha mais fácil de adotar no seu bairro: compostagem, reciclagem ou economia de água?',
@@ -329,11 +478,11 @@ function ecoAskQuestion() {
         'Como as hortas comunitárias podem ajudar a melhorar a qualidade de vida no seu bairro?',
         'Você já participou de alguma ação de coleta de lixo eletrônico? Conte como foi!'
     ];
+    
     const pergunta = perguntas[Math.floor(Math.random() * perguntas.length)];
-    // Adiciona pergunta no chat
     chatMessages.innerHTML += `<div class="message bot">${pergunta}</div>`;
     chatMessages.scrollTop = chatMessages.scrollHeight;
-    // 1s depois, Eco pensa
+    
     setTimeout(() => {
         ecoThinking();
     }, 1000);
@@ -343,18 +492,20 @@ function ecoThinking() {
     const avatar = document.getElementById('eco-avatar');
     const chatMessages = document.getElementById('chat-messages');
     if (!avatar || !chatMessages) return;
+    
     avatar.src = 'assets/Images/agente/3-pensando.png';
-    // Pontinhos piscando
+    
     let dots = 0;
     const thinkingDiv = document.createElement('div');
     thinkingDiv.className = 'message bot thinking';
     chatMessages.appendChild(thinkingDiv);
     chatMessages.scrollTop = chatMessages.scrollHeight;
+    
     const interval = setInterval(() => {
         dots = (dots + 1) % 4;
         thinkingDiv.textContent = '...'.substring(0, dots);
     }, 500);
-    // Após 3s, começa a responder
+    
     setTimeout(() => {
         clearInterval(interval);
         thinkingDiv.remove();
@@ -366,7 +517,7 @@ function ecoAnswer() {
     const avatar = document.getElementById('eco-avatar');
     const chatMessages = document.getElementById('chat-messages');
     if (!avatar || !chatMessages) return;
-    // Resposta exemplo
+    
     const resposta = 'Ótima pergunta! Adotar pequenas ações, como separar resíduos e incentivar vizinhos, faz toda a diferença. Que tal começar hoje mesmo?';
     let i = 0;
     let talking = true;
@@ -374,20 +525,21 @@ function ecoAnswer() {
     answerDiv.className = 'message bot';
     chatMessages.appendChild(answerDiv);
     chatMessages.scrollTop = chatMessages.scrollHeight;
+    
     let lastSwitch = Date.now();
-    // Alterna imagens enquanto digita
+    
     function typeChar() {
         if (i < resposta.length) {
             answerDiv.textContent += resposta[i];
             if (resposta[i] !== ' ') {
                 if (Date.now() - lastSwitch > 90) {
-                    avatar.src = (talking ? 'assets/Images/agente/4-falando1.png' : 'assets/Images/agente/5-falando2.png');
+                    avatar.src = talking ? 'assets/Images/agente/4-falando1.png' : 'assets/Images/agente/5-falando2.png';
                     talking = !talking;
                     lastSwitch = Date.now();
                 }
             }
             chatMessages.scrollTop = chatMessages.scrollHeight;
-            setTimeout(typeChar, 30); // digitação rápida
+            setTimeout(typeChar, 30);
             i++;
         } else {
             avatar.src = 'assets/Images/agente/1-sorrindo.png';
@@ -395,41 +547,56 @@ function ecoAnswer() {
             setTimeout(ecoWelcomeLoop, 1000);
         }
     }
+    
     typeChar();
 }
 
-// Alerta 'Em breve!' para tópicos do menu de navegação
-function setupFakeMenuAlert() {
-    document.querySelectorAll('.fake-menu li').forEach(function(item) {
-        item.addEventListener('click', function(e) {
-            e.preventDefault();
-            const old = document.getElementById('soon-alert');
-            if (old) old.remove();
-            const alert = document.createElement('div');
-            alert.id = 'soon-alert';
-            alert.textContent = 'Em breve!';
-            alert.style.position = 'fixed';
-            alert.style.top = '18px';
-            alert.style.left = '50%';
-            alert.style.transform = 'translateX(-50%)';
-            alert.style.background = 'var(--primary)';
-            alert.style.color = '#fff';
-            alert.style.padding = '10px 28px';
-            alert.style.borderRadius = '12px';
-            alert.style.fontWeight = 'bold';
-            alert.style.fontSize = '1.1rem';
-            alert.style.zIndex = '9999';
-            alert.style.boxShadow = '0 2px 12px rgba(60,100,60,0.13)';
-            document.body.appendChild(alert);
-            setTimeout(() => { alert.remove(); }, 1200);
-        });
-    });
-}
+// =============================================
+// INICIALIZAÇÃO DA PÁGINA
+// =============================================
 
-document.addEventListener('DOMContentLoaded', function() {
-    setupHamburgerMenu();
-    setupFakeMenuAlert();
-    if (window.location.pathname.includes('')) {
+/**
+ * Inicializa todas as funcionalidades da página
+ */
+function initPage() {
+    // Configura menus
+    setupMobileMenu();
+    setupDesktopMenu();
+    setupSmoothScrolling();
+    
+    // Configura animações
+    setupAnimations();
+    
+    // Configura o EcoBot se estiver na página correta
+    if (document.getElementById('eco-avatar')) {
         ecoWelcomeAndChat();
     }
-});
+    
+    // Configura o envio de mensagens com Enter
+    const userInput = document.getElementById('user-input');
+    if (userInput) {
+        userInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendUserMessage();
+            }
+        });
+    }
+    
+    // Atualiza o ranking se estiver na página correta
+    if (document.getElementById('neighborhood-rank')) {
+        updateRanking();
+    }
+    
+    // Configura o formulário de contato
+    const contactForm = document.querySelector('form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Obrigado pelo seu contato! Responderemos em breve.');
+            this.reset();
+        });
+    }
+}
+
+// Inicializa a página quando o DOM estiver carregado
+document.addEventListener('DOMContentLoaded', initPage);

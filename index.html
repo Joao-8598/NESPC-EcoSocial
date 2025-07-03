@@ -22,7 +22,7 @@
                 </div>
                 
                 <!-- Botão de menu para PC (aparece em md:) -->
-                <div class="md:flex md:items-center md:ml-6">
+                <div class="hidden md:flex md:items-center md:ml-6">
                     <button type="button" id="desktop-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-green-600 hover:bg-gray-100 focus:outline-none">
                         <span class="sr-only">Open menu</span>
                         <i class="fas fa-bars"></i>
@@ -43,8 +43,8 @@
                     <a href="feed.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">Ações</a>    
                 </div>
                 
-                <!-- Botão de menu mobile (aparece apenas em mobile) -->
-                <div class="-mr-2 flex items-center md:hidden">
+                <!-- Botão de menu mobile (aparece apenas abaixo de md:) -->
+                <div class="flex items-center md:hidden">
                     <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-green-600 hover:bg-gray-100 focus:outline-none">
                         <span class="sr-only">Open main menu</span>
                         <i class="fas fa-bars"></i>
@@ -56,16 +56,15 @@
         <!-- Mobile menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#about" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Sobre</a>
-                <a href="#features" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Recursos</a>
-                <a href="#gamification" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Gamificação</a>
-                <a href="#partners" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Parceiros</a>
-                <a href="#contact" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Contato</a>
+                <a href="index.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600 font-bold text-green-600">Início</a>
+                <a href="ecobot.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">EcoBot</a>
+                <a href="ranking.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">Ranking</a>   
+                <a href="feed.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">Ações</a> 
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Seção Herói -->
     <section class="hero-gradient text-white py-20 md:py-32">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row items-center">
@@ -90,7 +89,7 @@
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- Seção Sobre -->
     <section id="about" class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -135,7 +134,7 @@
         </div>
     </section>
 
-    <!-- Features Section -->
+    <!-- Seção de Features -->
     <section id="features" class="py-16 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -218,11 +217,11 @@
         </div>
     </section>
 
-    <!-- Gamification Section -->
+    <!-- Seção de Gamificação -->
     <section id="gamification" class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">Gamificação e Incentivos</h2>
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Incentivos</h2>
                 <div class="w-20 h-1 bg-green-500 mx-auto mb-6"></div>
                 <p class="text-gray-600 max-w-3xl mx-auto">
                     Nosso sistema de recompensas torna a sustentabilidade divertida e gratificante
@@ -399,9 +398,9 @@
                     <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
                         <i class="fas fa-calendar-check text-green-600 text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-center text-gray-800 mb-3">Eventos Premium</h3>
+                    <h3 class="text-xl font-bold text-center text-gray-800 mb-3">Eventos Prime</h3>
                     <p class="text-gray-600 text-center">
-                        Workshops e oficinas pagas diretamente via plataforma, com comissão para o EcoSocial.
+                        Workshops e oficinas gratuitas, realizadas pela EcoSocial.
                     </p>
                 </div>
             </div>
@@ -498,10 +497,10 @@
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
                                 <a href="#" class="bg-green-100 text-green-600 hover:bg-green-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
-                                    <i class="fab fa-instagram"></i>
+                                    <i class="fab fa-twitter"></i>
                                 </a>
                                 <a href="#" class="bg-green-100 text-green-600 hover:bg-green-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
-                                    <i class="fab fa-twitter"></i>
+                                    <i class="fab fa-instagram"></i>
                                 </a>
                                 <a href="#" class="bg-green-100 text-green-600 hover:bg-green-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
                                     <i class="fab fa-linkedin-in"></i>
