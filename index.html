@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoSocial - Transformando atitudes sustentáveis em estilo de vida</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="shortcut icon" href="../PT1/assets/Images/icons/favicon.ico" type="image/x-icon">
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <img class="h-12 w-auto" src="../PT1/assets/Images/icons/logolat-512x226.png" alt="EcoSocial Logo">
+                    </div>
+                </div>
+                
+                <!-- Botão de menu para PC (aparece em md:) -->
+                <div class="md:flex md:items-center md:ml-6">
+                    <button type="button" id="desktop-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-green-600 hover:bg-gray-100 focus:outline-none">
+                        <span class="sr-only">Open menu</span>
+                        <i class="fas fa-bars"></i>
+                        <span class="ml-2 hidden lg:inline">Menu</span>
+                    </button>
+                </div>
+                
+                <!-- Menu original (oculto por padrão, será mostrado via JavaScript quando o botão for clicado) -->
+                <div id="desktop-menu" class="hidden absolute top-16 right-0 mt-2 w-56 bg-white rounded-md shadow-lg py-1 z-50">
+                    <a href="index.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600 font-bold text-green-600">Início</a>
+                    <a href="#about" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">Sobre</a>
+                    <a href="#features" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">Recursos</a>
+                    <a href="#gamification" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">Gamificação</a>                 
+                    <a href="#partners" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">Parceiros</a>
+                    <a href="#contact" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">Contato</a>
+                    <a href="ecobot.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">EcoBot</a>
+                    <a href="ranking.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">Ranking</a>   
+                    <a href="feed.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">Ações</a>    
+                </div>
+                
+                <!-- Botão de menu mobile (aparece apenas em mobile) -->
+                <div class="-mr-2 flex items-center md:hidden">
+                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-green-600 hover:bg-gray-100 focus:outline-none">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#about" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Sobre</a>
+                <a href="#features" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Recursos</a>
+                <a href="#gamification" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Gamificação</a>
+                <a href="#partners" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Parceiros</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Contato</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-20 md:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-6">Transforme atitudes sustentáveis em estilo de vida</h1>
+                    <p class="text-xl mb-8">Junte-se à rede social que recompensa suas ações ecológicas e transforma sua comunidade em um lugar mais verde.</p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <button class="bg-white text-green-600 hover:bg-gray-100 font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300">
+                            Baixe o App
+                        </button>
+                        <button class="bg-transparent border-2 border-white hover:bg-white hover:text-green-600 font-bold py-3 px-6 rounded-lg transition duration-300">
+                            Saiba Mais
+                        </button>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative">
+                        <img src="https://cdn.dribbble.com/users/31864/screenshots/3666542/media/8f4516a68faf9c33990e67e457ab4e9b.png" alt="EcoSocial App Mockup" class="w-full max-w-md floating-button">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">O Problema que Resolvemos</h2>
+                <div class="w-20 h-1 bg-green-500 mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto">
+                    As grandes cidades enfrentam desafios ambientais crescentes: poluição, congestionamento e falta de engajamento dos moradores em práticas sustentáveis. Apesar de haver interesse, falta uma plataforma que traduza boas intenções em ações concretas e mensuráveis.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1581093196270-c1a1bdf5a1e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Problemas urbanos" class="rounded-lg shadow-xl w-full">
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Nossa Solução</h3>
+                    <p class="text-gray-600 mb-6">
+                        O EcoSocial une rede social, gamificação e dados georreferenciados para guiar, inspirar e recompensar usuários que adotam medidas verdes. Transformamos pequenas ações do dia a dia em benefícios reais para sua comunidade.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 bg-green-100 rounded-full p-2">
+                                <i class="fas fa-check text-green-600"></i>
+                            </div>
+                            <p class="ml-3 text-gray-600">Ações personalizadas baseadas em seu perfil e interesses</p>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 bg-green-100 rounded-full p-2">
+                                <i class="fas fa-check text-green-600"></i>
+                            </div>
+                            <p class="ml-3 text-gray-600">Mapa interativo com pontos sustentáveis próximos a você</p>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 bg-green-100 rounded-full p-2">
+                                <i class="fas fa-check text-green-600"></i>
+                            </div>
+                            <p class="ml-3 text-gray-600">Roteirização inteligente para mobilidade sustentável</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Recursos Principais</h2>
+                <div class="w-20 h-1 bg-green-500 mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto">
+                    O EcoSocial oferece ferramentas poderosas para transformar sua rotina em uma jornada sustentável
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-md feature-card transition duration-300">
+                    <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-user text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-gray-800 mb-3">Perfil Personalizado</h3>
+                    <p class="text-gray-600 text-center">
+                        Defina seus interesses (mobilidade, reciclagem, hortas etc.) e receba sugestões de ações personalizadas.
+                    </p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="bg-white p-8 rounded-xl shadow-md feature-card transition duration-300">
+                    <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-map-marked-alt text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-gray-800 mb-3">Mapa Interativo</h3>
+                    <p class="text-gray-600 text-center">
+                        Encontre pontos de coleta, hortas comunitárias e eventos sustentáveis próximos a você.
+                    </p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="bg-white p-8 rounded-xl shadow-md feature-card transition duration-300">
+                    <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-route text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-gray-800 mb-3">Roteirização Inteligente</h3>
+                    <p class="text-gray-600 text-center">
+                        Planeje trajetos de bike, transporte público ou a pé e acumule pontos conforme o modal verde escolhido.
+                    </p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="bg-white p-8 rounded-xl shadow-md feature-card transition duration-300">
+                    <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-trophy text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-gray-800 mb-3">Ranking de Bairros</h3>
+                    <p class="text-gray-600 text-center">
+                        Vizinhos concorrem em pontuação sustentável - estimulamos a coletividade e o orgulho local.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Interactive Map Demo -->
+            <div class="mt-16 bg-white p-6 rounded-xl shadow-lg">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Explore o Mapa Sustentável</h3>
+                <div id="map-container" class="bg-gray-200 flex items-center justify-center" style="height: 400px;">
+                    <div class="text-center p-8">
+                        <i class="fas fa-map-marked-alt text-5xl text-green-600 mb-4"></i>
+                        <p class="text-gray-700 mb-4">Visualize pontos sustentáveis em sua região</p>
+                        <button onclick="ativarLoc()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg transition duration-300">
+                            Ativar Localização
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Adicione o CSS do Leaflet -->
+            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+            
+            <!-- Adicione o JavaScript do Leaflet -->
+            <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+            
+            <script>
+
+            </script>
+        </div>
+    </section>
+
+    <!-- Gamification Section -->
+    <section id="gamification" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Gamificação e Incentivos</h2>
+                <div class="w-20 h-1 bg-green-500 mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto">
+                    Nosso sistema de recompensas torna a sustentabilidade divertida e gratificante
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Conquiste Selos e Benefícios</h3>
+                    <p class="text-gray-600 mb-6">
+                        O grande diferencial do EcoSocial é o sistema de gamificação e incentivos fiscais que transformam suas ações em benefícios reais.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-8">
+                        <div class="bg-green-50 p-4 rounded-lg flex items-center">
+                            <div class="bg-green-100 rounded-full p-3 mr-4">
+                                <i class="fas fa-medal text-green-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Badges e Níveis</h4>
+                                <p class="text-sm text-gray-600">Conquiste selos como 'Eco Explorador' ou 'Mestre da Compostagem'</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-green-50 p-4 rounded-lg flex items-center">
+                            <div class="bg-green-100 rounded-full p-3 mr-4">
+                                <i class="fas fa-percentage text-green-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Descontos Progressivos</h4>
+                                <p class="text-sm text-gray-600">Bairros com melhores rankings recebem descontos no IPTU</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-green-50 p-4 rounded-lg flex items-center">
+                            <div class="bg-green-100 rounded-full p-3 mr-4">
+                                <i class="fas fa-robot text-green-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Assistente Virtual</h4>
+                                <p class="text-sm text-gray-600">Nosso bot tira dúvidas e sugere ações rápidas 24/7</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-green-50 p-4 rounded-lg flex items-center">
+                            <div class="bg-green-100 rounded-full p-3 mr-4">
+                                <i class="fas fa-users text-green-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Comunidade Ativa</h4>
+                                <p class="text-sm text-gray-600">Conecte-se com outros eco-cidadãos e compartilhe conquistas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="bg-gray-100 p-8 rounded-xl">
+                        <h4 class="text-xl font-bold text-gray-800 mb-6 text-center">Conheça Nossas Conquistas</h4>
+                        <div class="flex flex-wrap justify-center gap-4">
+                            <div class="badge-icon bg-yellow-100 p-4 rounded-full w-24 h-24 flex flex-col items-center justify-center">
+                                <i class="fas fa-seedling text-yellow-600 text-3xl mb-2"></i>
+                                <span class="text-xs font-bold text-gray-700">Jardineiro</span>
+                            </div>
+                            <div class="badge-icon bg-blue-100 p-4 rounded-full w-24 h-24 flex flex-col items-center justify-center">
+                                <i class="fas fa-bicycle text-blue-600 text-3xl mb-2"></i>
+                                <span class="text-xs font-bold text-gray-700">Ciclista</span>
+                            </div>
+                            <div class="badge-icon bg-purple-100 p-4 rounded-full w-24 h-24 flex flex-col items-center justify-center">
+                                <i class="fas fa-recycle text-purple-600 text-3xl mb-2"></i>
+                                <span class="text-xs font-bold text-gray-700">Reciclador</span>
+                            </div>
+                            <div class="badge-icon bg-red-100 p-4 rounded-full w-24 h-24 flex flex-col items-center justify-center">
+                                <i class="fas fa-leaf text-red-600 text-3xl mb-2"></i>
+                                <span class="text-xs font-bold text-gray-700">Eco-Herói</span>
+                            </div>
+                            <div class="badge-icon bg-green-100 p-4 rounded-full w-24 h-24 flex flex-col items-center justify-center">
+                                <i class="fas fa-trophy text-green-600 text-3xl mb-2"></i>
+                                <span class="text-xs font-bold text-gray-700">Líder</span>
+                            </div>
+                            <div class="badge-icon bg-indigo-100 p-4 rounded-full w-24 h-24 flex flex-col items-center justify-center">
+                                <i class="fas fa-star text-indigo-600 text-3xl mb-2"></i>
+                                <span class="text-xs font-bold text-gray-700">Lenda</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section id="partners" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Nossos Parceiros</h2>
+                <div class="w-20 h-1 bg-green-500 mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto">
+                    Para ampliar o impacto, firmamos parcerias com empresas locais, ONGs e prefeituras
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-16">
+                <div class="bg-white p-6 rounded-lg shadow-md flex items-center justify-center h-32">
+                    <img src="https://via.placeholder.com/150x60?text=Prefeitura" alt="Prefeitura" class="max-h-12">
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md flex items-center justify-center h-32">
+                    <img src="https://via.placeholder.com/150x60?text=ONG+Verde" alt="ONG Verde" class="max-h-12">
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md flex items-center justify-center h-32">
+                    <img src="https://via.placeholder.com/150x60?text=Bike+Company" alt="Bike Company" class="max-h-12">
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md flex items-center justify-center h-32">
+                    <img src="https://via.placeholder.com/150x60?text=Recicla+Brasil" alt="Recicla Brasil" class="max-h-12">
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md flex items-center justify-center h-32">
+                    <img src="https://via.placeholder.com/150x60?text=Eco+Energy" alt="Eco Energy" class="max-h-12">
+                </div>
+            </div>
+            
+            <div class="bg-white p-8 rounded-xl shadow-lg">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Metas para o Primeiro Ano</h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="text-5xl font-bold text-green-600 mb-3">30K</div>
+                        <p class="text-gray-700 font-medium">usuários ativos</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-5xl font-bold text-green-600 mb-3">10</div>
+                        <p class="text-gray-700 font-medium">cidades participantes</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-5xl font-bold text-green-600 mb-3">5</div>
+                        <p class="text-gray-700 font-medium">parcerias estratégicas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Model Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Modelo de Negócio</h2>
+                <div class="w-20 h-1 bg-green-500 mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto">
+                    O EcoSocial gera receita enquanto promove a sustentabilidade
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-green-50 p-8 rounded-xl shadow-md">
+                    <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-crown text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-gray-800 mb-3">Assinaturas Premium</h3>
+                    <p class="text-gray-600 text-center">
+                        Acesso avançado a análises de desempenho e relatórios de impacto ambiental personalizados.
+                    </p>
+                </div>
+                
+                <div class="bg-green-50 p-8 rounded-xl shadow-md">
+                    <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-ad text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-gray-800 mb-3">Patrocínios de Marcas</h3>
+                    <p class="text-gray-600 text-center">
+                        Marcas eco-friendly apoiam ações e aparecem em destaque para usuários alinhados com seus valores.
+                    </p>
+                </div>
+                
+                <div class="bg-green-50 p-8 rounded-xl shadow-md">
+                    <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-calendar-check text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-gray-800 mb-3">Eventos Premium</h3>
+                    <p class="text-gray-600 text-center">
+                        Workshops e oficinas pagas diretamente via plataforma, com comissão para o EcoSocial.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-green-600 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold mb-6">Pronto para transformar seu bairro?</h2>
+            <p class="text-xl mb-8 max-w-3xl mx-auto">
+                Junte-se a nós nessa jornada e torne sua comunidade uma referência em sustentabilidade
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <button class="bg-white text-green-600 hover:bg-gray-100 font-bold py-3 px-8 rounded-lg shadow-lg transition duration-300">
+                    Baixe o App Agora
+                </button>
+                <button class="bg-transparent border-2 border-white hover:bg-white hover:text-green-600 font-bold py-3 px-8 rounded-lg transition duration-300">
+                    Seja um Parceiro
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Fale Conosco</h2>
+                <div class="w-20 h-1 bg-green-500 mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto">
+                    Tem dúvidas ou quer saber mais sobre o EcoSocial? Entre em contato!
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <form class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nome</label>
+                            <input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                            <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Mensagem</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300">
+                            Enviar Mensagem
+                        </button>
+                    </form>
+                </div>
+                
+                <div>
+                    <div class="bg-gray-50 p-8 rounded-xl shadow-md h-full">
+                        <h3 class="text-xl font-bold text-gray-800 mb-6">Informações de Contato</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-green-100 rounded-full p-3">
+                                    <i class="fas fa-map-marker-alt text-green-600"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-sm font-medium text-gray-500">Endereço</p>
+                                    <p class="text-gray-700">Av. Sustentabilidade, 123 - Centro, Cidade - SP</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-green-100 rounded-full p-3">
+                                    <i class="fas fa-envelope text-green-600"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-sm font-medium text-gray-500">Email</p>
+                                    <p class="text-gray-700">contato@ecosocial.com.br</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-green-100 rounded-full p-3">
+                                    <i class="fas fa-phone text-green-600"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-sm font-medium text-gray-500">Telefone</p>
+                                    <p class="text-gray-700">(11) 98765-4321</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h4 class="text-lg font-bold text-gray-800 mb-4">Siga-nos nas Redes Sociais</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="bg-green-100 text-green-600 hover:bg-green-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="bg-green-100 text-green-600 hover:bg-green-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="bg-green-100 text-green-600 hover:bg-green-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="bg-green-100 text-green-600 hover:bg-green-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <img class="h-12 w-auto" src="../PT1/assets/Images/icons/logo_lateral.png" alt="EcoSocial Logo">
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        Transformando atitudes sustentáveis em estilo de vida. Junte-se a nós na construção de cidades mais verdes.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Links Rápidos</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-green-400 transition duration-300">Início</a></li>
+                        <li><a href="feed.html" class="text-gray-400 hover:text-green-400 transition duration-300">Ações</a></li>
+                        <li><a href="ecobot.html" class="text-gray-400 hover:text-green-400 transition duration-300">EcoBot</a></li>
+                        <li><a href="ranking.html" class="text-gray-400 hover:text-green-400 transition duration-300">Ranking</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Legal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">Termos de Uso</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">Política de Privacidade</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">
+                    &copy; 2025 EcoSocial by NESPC. Todos os direitos reservados.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

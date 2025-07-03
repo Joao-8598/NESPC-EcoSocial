@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ecoSocial - Ações Sustentáveis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/feed.css">
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <img class="h-12 w-auto" src="../PT1/assets/Images/icons/logolat-512x226.png" alt="EcoSocial Logo">
+                    </div>
+                </div>
+                <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-green-600 px-3 py-2 text-sm font-medium">Início</a>
+                    <a href="feed.html" class="text-gray-700 hover:text-green-600 px-3 py-2 text-sm font-medium font-bold text-green-600">Ações</a>
+                    <a href="ecobot.html" class="text-gray-700 hover:text-green-600 px-3 py-2 text-sm font-medium">EcoBot</a>
+                    <a href="ranking.html" class="text-gray-700 hover:text-green-600 px-3 py-2 text-sm font-medium">Ranking</a>
+                </div>
+                <div class="-mr-2 flex items-center md:hidden">
+                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-green-600 hover:bg-gray-100 focus:outline-none">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Início</a>
+                <a href="feed.html" class="block px-3 py-2 text-base font-medium text-green-600 hover:bg-gray-50">Ações</a>
+                <a href="ecobot.html" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">EcoBot</a>
+                <a href="ranking.html" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Ranking</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="hero-gradient text-white py-8 px-6 rounded-xl mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold mb-4"><i class="fas fa-plus-circle mr-2"></i> Ações Sustentáveis</h1>
+            <p class="text-lg">Registre suas ações e contribua para um bairro mais sustentável!</p>
+        </div>
+        
+        <div class="grid grid-cols-1 gap-8">
+            <!-- Action Form -->
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-bolt text-green-600 mr-3"></i> Simular Ação
+                </h2>
+                <div class="space-y-4">
+                    <select id="action-type" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                        <option value="10">♻️ Reciclagem (1kg = 10 pontos)</option>
+                        <option value="15">🚲 Transporte sustentável (5km = 15 pontos)</option>
+                        <option value="50">🌳 Plantio de árvore (1 árvore = 50 pontos)</option>
+                        <option value="20">🥗 Compostagem (1kg = 20 pontos)</option>
+                        <option value="5">💧 Redução de água (banho -5min = 5 pontos)</option>
+                        <option value="3">🛒 Ecobag (1 uso = 3 pontos)</option>
+                    </select>
+                    
+                    <select id="neighborhood" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                        <option value="Centro">Centro</option>
+                        <option value="Jardim Igapó">Jardim Igapó</option>
+                        <option value="Vila Brasil">Vila Brasil</option>
+                        <option value="Gleba Palhano">Gleba Palhano</option>
+                        <option value="Conjunto Parigot">Conjunto Parigot</option>
+                        <option value="Jardim Maringá">Jardim Maringá</option>
+                    </select>
+                    
+                    <button onclick="simulatePost()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 flex items-center justify-center gap-2">
+                        <i class="fas fa-bolt"></i> Registrar Ação!
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Feed Posts -->
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-newspaper text-green-600 mr-3"></i> Últimas Ações
+                </h2>
+                <div class="space-y-6" id="feed-posts">
+                    <!-- Posts serão gerados aqui pelo JavaScript -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <img class="h-12 w-auto" src="../PT1/assets/Images/icons/logo_lateral.png" alt="EcoSocial Logo">
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        Transformando atitudes sustentáveis em estilo de vida. Junte-se a nós na construção de cidades mais verdes.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Links Rápidos</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-green-400 transition duration-300">Início</a></li>
+                        <li><a href="feed.html" class="text-gray-400 hover:text-green-400 transition duration-300">Ações</a></li>
+                        <li><a href="ecobot.html" class="text-gray-400 hover:text-green-400 transition duration-300">EcoBot</a></li>
+                        <li><a href="ranking.html" class="text-gray-400 hover:text-green-400 transition duration-300">Ranking</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Legal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">Termos de Uso</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">Política de Privacidade</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">
+                    &copy; 2025 EcoSocial by NESPC. Todos os direitos reservados.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/feed.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

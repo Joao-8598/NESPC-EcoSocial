@@ -1,0 +1,164 @@
+.hero-gradient {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.9) 0%, rgba(5, 150, 105, 0.9) 100%);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.floating-button {
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+.badge-icon {
+    transition: all 0.3s ease;
+}
+
+.badge-icon:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Estilos específicos do ecobot */
+.chat-container {
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.message.user {
+    background: #e0f2e9;
+    color: #2d4a2d;
+    border-radius: 1rem;
+    padding: 0.7rem 1.1rem;
+    margin-bottom: 0.7rem;
+    max-width: 80%;
+    align-self: flex-end;
+    border: 1.5px solid #5a8c4a;
+}
+
+.message.bot {
+    background: #4e7c3a;
+    color: #fff;
+    border-radius: 1rem;
+    padding: 0.7rem 1.1rem;
+    margin-bottom: 0.7rem;
+    max-width: 80%;
+    box-shadow: 0 2px 8px rgba(60, 100, 60, 0.07);
+    border: 1.5px solid #9fcf8a;
+}
+
+.quick-btn {
+    background: linear-gradient(to right, #5a8c4a, #7bb86f);
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.quick-btn:hover {
+    background: #3a5d3a;
+    transform: translateY(-2px);
+}
+
+.send-btn {
+    background: #5a8c4a;
+    color: white;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.send-btn:hover {
+    background: #2d4a2d;
+    transform: scale(1.05);
+}
+
+.agent-avatar img {
+    width: 110px;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 4px 16px rgba(93, 115, 126, 0.10);
+    background: #eaf6e6;
+    padding: 8px;
+    border: 3px solid #5a8c4a;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.3s ease-in;
+}
+
+/* Estilos para o chat */
+.chat-body-with-agent {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 18px;
+    position: relative;
+}
+
+.chat-body-with-agent .chat-messages {
+    flex: 1;
+    min-width: 0;
+}
+
+.chat-body-with-agent .agent-avatar {
+    align-self: flex-end;
+    margin-bottom: 8px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.chat-body-with-agent .agent-avatar img {
+    width: 110px;
+    height: auto;
+    border-radius: 0;
+    box-shadow: none;
+    background: none;
+    padding: 0;
+    border: none;
+    display: block;
+}
+
+@media (max-width: 700px) {
+    .chat-body-with-agent {
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 0;
+    }
+    .chat-body-with-agent .agent-avatar {
+        margin-bottom: 10px;
+        margin-top: 0;
+    }
+    .chat-body-with-agent .agent-avatar img {
+        width: 80px;
+    }
+}

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ecoSocial - EcoBot Assistente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/ecobot.css">
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <img class="h-12 w-auto" src="../PT1/assets/Images/icons/logolat-512x226.png" alt="EcoSocial Logo">
+                    </div>
+                </div>
+                <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-green-600 px-3 py-2 text-sm font-medium">Início</a>
+                    <a href="feed.html" class="text-gray-700 hover:text-green-600 px-3 py-2 text-sm font-medium">Ações</a>
+                    <a href="ecobot.html" class="text-gray-700 hover:text-green-600 px-3 py-2 text-sm font-medium font-bold text-green-600">EcoBot</a>
+                    <a href="ranking.html" class="text-gray-700 hover:text-green-600 px-3 py-2 text-sm font-medium">Ranking</a>
+                </div>
+                <div class="-mr-2 flex items-center md:hidden">
+                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-green-600 hover:bg-gray-100 focus:outline-none">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Início</a>
+                <a href="feed.html" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Ações</a>
+                <a href="ecobot.html" class="block px-3 py-2 text-base font-medium text-green-600 hover:bg-gray-50">EcoBot</a>
+                <a href="ranking.html" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Ranking</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="hero-gradient text-white py-8 px-6 rounded-xl mb-8">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-2/3 mb-6 md:mb-0">
+                    <h1 class="text-3xl md:text-4xl font-bold mb-4">EcoBot Assistente</h1>
+                    <p class="text-lg mb-6">Seu guia inteligente para sustentabilidade urbana. Pergunte sobre reciclagem, ecopontos, hortas comunitárias e mais!</p>
+                </div>
+                <div class="md:w-1/3 flex justify-center">
+                    <div class="relative">
+                        <img id="eco-avatar" src="https://cdn.dribbble.com/users/31864/screenshots/3666542/media/8f4516a68faf9c33990e67e457ab4e9b.png" alt="EcoBot" class="w-full max-w-xs floating-button">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Chat Container -->
+            <div class="lg:col-span-2">
+                <div class="bg-white chat-container">
+                    <div class="chat-header bg-green-600 text-white font-bold py-3 px-6 text-center">
+                        EcoBot Assistente
+                    </div>
+                    <div class="p-6">
+                        <div class="chat-body-with-agent">
+                            <div class="flex-1">
+                                <div class="chat-messages bg-gray-50 rounded-lg p-4 h-96 overflow-y-auto" id="chat-messages">
+                                    <div class="message bot animate-fadeIn">
+                                        Olá! Sou o EcoBot. Como posso ajudar você hoje? 
+                                        Pergunte sobre sustentabilidade, reciclagem ou hábitos ecológicos!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="agent-avatar ml-4">
+                                <img id="eco-avatar" src="https://cdn.dribbble.com/users/31864/screenshots/3666542/media/8f4516a68faf9c33990e67e457ab4e9b.png" alt="Agente EcoBot" />
+                                <div class="agent-name text-center font-bold text-green-600 mt-2">Eco</div>
+                            </div>
+                        </div>
+                        
+                        <div class="quick-actions grid grid-cols-2 gap-3 mt-4">
+                            <button class="quick-btn" onclick="sendQuickMessage('Quando é a coleta no Centro?')">
+                                <i class="fas fa-calendar mr-2"></i> Coleta no Centro
+                            </button>
+                            <button class="quick-btn" onclick="sendQuickMessage('Como reciclar plástico?')">
+                                <i class="fas fa-recycle mr-2"></i> Reciclagem
+                            </button>
+                            <button class="quick-btn" onclick="sendQuickMessage('Dicas sustentáveis')">
+                                <i class="fas fa-lightbulb mr-2"></i> Dicas
+                            </button>
+                            <button class="quick-btn" onclick="sendQuickMessage('Onde descartar óleo?')">
+                                <i class="fas fa-oil-can mr-2"></i> Descarte de óleo
+                            </button>
+                        </div>
+                        
+                        <div class="chat-input flex mt-6">
+                            <input type="text" id="user-input" placeholder="Digite sua mensagem..." class="flex-1 px-4 py-3 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                            <button class="send-btn" onclick="sendUserMessage()">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Info Sidebar -->
+            <div class="space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-info-circle text-green-600 mr-2"></i> Sobre o EcoBot
+                    </h3>
+                    <p class="text-gray-600 mb-4">
+                        Nosso assistente virtual está aqui para ajudar você a adotar práticas sustentáveis no seu dia a dia.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 bg-green-100 rounded-full p-2">
+                                <i class="fas fa-check text-green-600"></i>
+                            </div>
+                            <p class="ml-3 text-gray-600">Tire dúvidas sobre reciclagem e descarte correto</p>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 bg-green-100 rounded-full p-2">
+                                <i class="fas fa-check text-green-600"></i>
+                            </div>
+                            <p class="ml-3 text-gray-600">Encontre ecopontos e hortas comunitárias próximas</p>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 bg-green-100 rounded-full p-2">
+                                <i class="fas fa-check text-green-600"></i>
+                            </div>
+                            <p class="ml-3 text-gray-600">Receba dicas personalizadas para seu perfil</p>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-trophy text-green-600 mr-2"></i> Conquistas
+                    </h3>
+                    <p class="text-gray-600 mb-4">
+                        Complete interações com o EcoBot para desbloquear conquistas e ganhar pontos!
+                    </p>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="badge-icon bg-yellow-100 p-4 rounded-full w-full aspect-square flex flex-col items-center justify-center">
+                            <i class="fas fa-seedling text-yellow-600 text-3xl mb-2"></i>
+                            <span class="text-xs font-bold text-gray-700">Jardineiro</span>
+                        </div>
+                        <div class="badge-icon bg-blue-100 p-4 rounded-full w-full aspect-square flex flex-col items-center justify-center">
+                            <i class="fas fa-bicycle text-blue-600 text-3xl mb-2"></i>
+                            <span class="text-xs font-bold text-gray-700">Ciclista</span>
+                        </div>
+                        <div class="badge-icon bg-purple-100 p-4 rounded-full w-full aspect-square flex flex-col items-center justify-center">
+                            <i class="fas fa-recycle text-purple-600 text-3xl mb-2"></i>
+                            <span class="text-xs font-bold text-gray-700">Reciclador</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <img class="h-12 w-auto" src="../PT1/assets/Images/icons/logo_lateral.png" alt="EcoSocial Logo">
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        Transformando atitudes sustentáveis em estilo de vida. Junte-se a nós na construção de cidades mais verdes.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Links Rápidos</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-green-400 transition duration-300">Início</a></li>
+                        <li><a href="feed.html" class="text-gray-400 hover:text-green-400 transition duration-300">Ações</a></li>
+                        <li><a href="ecobot.html" class="text-gray-400 hover:text-green-400 transition duration-300">EcoBot</a></li>
+                        <li><a href="ranking.html" class="text-gray-400 hover:text-green-400 transition duration-300">Ranking</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Legal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">Termos de Uso</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">Política de Privacidade</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">
+                    &copy; 2025 EcoSocial by NESPC. Todos os direitos reservados.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/ecobot.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

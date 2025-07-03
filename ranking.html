@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ecoSocial - Ranking de Bairros</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/ranking.css">
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <img class="h-12 w-auto" src="../PT1/assets/Images/icons/logolat-512x226.png" alt="EcoSocial Logo">
+                    </div>
+                </div>
+                <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-green-600 px-3 py-2 text-sm font-medium">Início</a>
+                    <a href="feed.html" class="text-gray-700 hover:text-green-600 px-3 py-2 text-sm font-medium">Ações</a>
+                    <a href="ecobot.html" class="text-gray-700 hover:text-green-600 px-3 py-2 text-sm font-medium">EcoBot</a>
+                    <a href="ranking.html" class="text-gray-700 hover:text-green-600 px-3 py-2 text-sm font-medium font-bold text-green-600">Ranking</a>
+                </div>
+                <div class="-mr-2 flex items-center md:hidden">
+                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-green-600 hover:bg-gray-100 focus:outline-none">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Início</a>
+                <a href="feed.html" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Ações</a>
+                <a href="ecobot.html" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">EcoBot</a>
+                <a href="ranking.html" class="block px-3 py-2 text-base font-medium text-green-600 hover:bg-gray-50">Ranking</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="hero-gradient text-white py-8 px-6 rounded-xl mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold mb-4"><i class="fas fa-trophy mr-2"></i> Ranking de Bairros</h1>
+            <p class="text-lg">Veja como seu bairro está se saindo no desafio da sustentabilidade!</p>
+        </div>
+        
+        <div class="grid grid-cols-1 gap-8">
+            <!-- Ranking Chart -->
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-chart-line text-green-600 mr-3"></i> Desempenho Mensal
+                </h2>
+                <div class="chart-container" style="height: 300px;">
+                    <canvas id="ranking-chart"></canvas>
+                </div>
+            </div>
+            
+            <!-- Detailed Ranking -->
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-list-ol text-green-600 mr-3"></i> Classificação Detalhada
+                </h2>
+                <div class="neighborhood-rank space-y-4" id="neighborhood-rank">
+                    <!-- Ranking será gerado aqui pelo JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Impact Metrics -->
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-chart-pie text-green-600 mr-3"></i> Impacto Ambiental
+                </h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="metric-card bg-green-50 p-6 rounded-lg text-center">
+                        <i class="fas fa-tree text-4xl text-green-600 mb-4"></i>
+                        <div class="metric-value text-3xl font-bold text-green-600">350</div>
+                        <div class="metric-label text-gray-700 font-medium">Árvores plantadas</div>
+                    </div>
+                    <div class="metric-card bg-blue-50 p-6 rounded-lg text-center">
+                        <i class="fas fa-cloud text-4xl text-blue-600 mb-4"></i>
+                        <div class="metric-value text-3xl font-bold text-blue-600">4.2 t</div>
+                        <div class="metric-label text-gray-700 font-medium">CO2 reduzido</div>
+                    </div>
+                    <div class="metric-card bg-yellow-50 p-6 rounded-lg text-center">
+                        <i class="fas fa-trash text-4xl text-yellow-600 mb-4"></i>
+                        <div class="metric-value text-3xl font-bold text-yellow-600">2.8 t</div>
+                        <div class="metric-label text-gray-700 font-medium">Resíduos reciclados</div>
+                    </div>
+                    <div class="metric-card bg-indigo-50 p-6 rounded-lg text-center">
+                        <i class="fas fa-tint text-4xl text-indigo-600 mb-4"></i>
+                        <div class="metric-value text-3xl font-bold text-indigo-600">38.000 L</div>
+                        <div class="metric-label text-gray-700 font-medium">Água economizada</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <img class="h-12 w-auto" src="../PT1/assets/Images/icons/logo_lateral.png" alt="EcoSocial Logo">
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        Transformando atitudes sustentáveis em estilo de vida. Junte-se a nós na construção de cidades mais verdes.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Links Rápidos</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-green-400 transition duration-300">Início</a></li>
+                        <li><a href="feed.html" class="text-gray-400 hover:text-green-400 transition duration-300">Ações</a></li>
+                        <li><a href="ecobot.html" class="text-gray-400 hover:text-green-400 transition duration-300">EcoBot</a></li>
+                        <li><a href="ranking.html" class="text-gray-400 hover:text-green-400 transition duration-300">Ranking</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Legal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">Termos de Uso</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">Política de Privacidade</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">
+                    &copy; 2025 EcoSocial by NESPC. Todos os direitos reservados.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="assets/js/ranking.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
