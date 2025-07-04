@@ -7,8 +7,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="assets/css/index.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+
     <link rel="shortcut icon" href="assets/Images/icons/favicon.ico" type="image/x-icon">
+
+    <link rel="manifest" href="manifest.json">
+
 </head>
 <body class="font-sans bg-gray-50">
     <!-- Navigation -->
@@ -17,55 +20,64 @@
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
                     <div class="flex-shrink-0 flex items-center">
-                        <img class="h-12 w-auto" src="assets/Images/icons/logolat-512x226.png" alt="EcoSocial Logo">
+                        <a href="index.html">
+                            <img class="h-12 w-auto" src="assets/Images/icons/logolat-512x226.png" alt="EcoSocial Logo">
+                        </a>
                     </div>
                 </div>
                 
-                <!-- Botão de menu para PC (aparece em md:) -->
-                <div class="hidden md:flex md:items-center md:ml-6">
-                    <button type="button" id="desktop-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-green-600 hover:bg-gray-100 focus:outline-none">
-                        <span class="sr-only">Open menu</span>
-                        <i class="fas fa-bars"></i>
-                        <span class="ml-2 hidden lg:inline">Menu</span>
+                <div class="flex items-center ml-4">
+                    <!-- Botão modo escuro -->
+                    <button id="theme-toggle" type="button" class="text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg p-2">
+                        <i id="theme-icon" class="fas fa-moon"></i>
                     </button>
-                </div>
-                
-                <!-- Menu original (oculto por padrão, será mostrado via JavaScript quando o botão for clicado) -->
-                <div id="desktop-menu" class="hidden absolute top-16 right-0 mt-2 w-56 bg-white rounded-md shadow-lg py-1 z-50">
-                    <a href="index.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600 font-bold text-green-600">Início</a>
-                    <a href="#about" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">Sobre</a>
-                    <a href="#features" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">Recursos</a>
-                    <a href="#gamification" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">Gamificação</a>                 
-                    <a href="#partners" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">Parceiros</a>
-                    <a href="#contact" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">Contato</a>
-                    <a href="ecobot.html" class="block px-5 py-3 text-sm text-gray-900 hover:bg-green-50 hover:text-green-400">EcoBot</a>
-                    <a href="ranking.html" class="block px-5 py-3 text-sm text-gray-900 hover:bg-green-50 hover:text-green-400">Ranking</a>   
-                    <a href="feed.html" class="block px-5 py-3 text-sm text-gray-900 hover:bg-green-50 hover:text-green-400">Ações</a>    
-                </div>
-                
-                <!-- Botão de menu mobile (aparece apenas abaixo de md:) -->
-                <div class="flex items-center md:hidden">
-                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-green-600 hover:bg-gray-100 focus:outline-none">
-                        <span class="sr-only">Open main menu</span>
-                        <i class="fas fa-bars"></i>
-                    </button>
+
+                    <!-- Botão de menu para PC (aparece em md:) -->
+                    <div class="hidden md:flex md:items-center md:ml-6">
+                        <button type="button" id="desktop-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-green-600 hover:bg-gray-100 focus:outline-none">
+                            <span class="sr-only">Open menu</span>
+                            <i class="fas fa-bars"></i>
+                            <span class="ml-2 hidden lg:inline">Menu</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Menu original (oculto por padrão, será mostrado via JavaScript quando o botão for clicado) -->
+                    <div id="desktop-menu" class="hidden absolute top-16 right-0 mt-2 w-56 bg-white rounded-md shadow-lg py-1 z-50">
+                        <a href="#main" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600 font-bold text-green-600">Início</a>
+                        <a href="#about" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">Sobre</a>
+                        <a href="#features" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">Recursos</a>
+                        <a href="#gamification" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">Gamificação</a>                 
+                        <a href="#partners" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">Parceiros</a>
+                        <a href="#contact" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">Contato</a>
+                        <a href="ecobot.html" class="block px-5 py-3 text-sm text-gray-900 hover:bg-green-50 hover:text-green-400">EcoBot</a>
+                        <a href="ranking.html" class="block px-5 py-3 text-sm text-gray-900 hover:bg-green-50 hover:text-green-400">Ranking</a>   
+                        <a href="feed.html" class="block px-5 py-3 text-sm text-gray-900 hover:bg-green-50 hover:text-green-400">Ações</a>    
+                    </div>
+                    
+                    <!-- Botão de menu mobile (aparece apenas abaixo de md:) -->
+                    <div class="flex items-center md:hidden">
+                        <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-green-600 hover:bg-gray-100 focus:outline-none">
+                            <span class="sr-only">Open main menu</span>
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- Mobile menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="index.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600 font-bold text-green-600">Início</a>
-                <a href="ecobot.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">EcoBot</a>
-                <a href="ranking.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">Ranking</a>   
-                <a href="feed.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">Ações</a> 
+            
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    <a href="index.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600 font-bold text-green-600">Início</a>
+                    <a href="ecobot.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">EcoBot</a>
+                    <a href="ranking.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">Ranking</a>   
+                    <a href="feed.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600">Ações</a> 
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Seção Herói -->
-    <section class="hero-gradient text-white py-20 md:py-32">
+    <!-- Seção Hero -->
+    <section id="main" class="hero-gradient text-white py-20 md:py-32">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row items-center">
                 <div class="md:w-1/2 mb-10 md:mb-0">
@@ -519,7 +531,9 @@
             <div class="grid md:grid-cols-4 gap-8">
                 <div>
                     <div class="flex items-center mb-4">
-                        <img class="h-12 w-auto" src="assets/Images/icons/logo_lateral.png" alt="EcoSocial Logo">
+                        <a href="index.html">
+                            <img class="h-20 w-auto" src="assets/Images/icons/NESPC-512x226.png" alt="EcoSocial Logo">
+                        </a>
                     </div>
                     <p class="text-gray-400 text-sm">
                         Transformando atitudes sustentáveis em estilo de vida. Junte-se a nós na construção de cidades mais verdes.

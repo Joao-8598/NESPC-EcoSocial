@@ -1,10 +1,29 @@
-// Mobile menu toggle
+// JavaScript para controlar o menu desktop
+document.getElementById('desktop-menu-button').addEventListener('click', function() {
+    const menu = document.getElementById('desktop-menu');
+    menu.classList.toggle('hidden');
+});
+
+
+// Menu mobile
 document.getElementById('mobile-menu-button').addEventListener('click', function() {
     const menu = document.getElementById('mobile-menu');
     menu.classList.toggle('hidden');
 });
 
-// Smooth scrolling for anchor links
+
+// Fechar o menu quando clicar fora
+document.addEventListener('click', function(event) {
+    const menu = document.getElementById('desktop-menu');
+    const button = document.getElementById('desktop-menu-button');
+    
+    if (!menu.contains(event.target) && !button.contains(event.target)) {
+        menu.classList.add('hidden');
+    }
+});
+
+
+// Scrol suave para os links âncoras
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -28,6 +47,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+
 // Animate elements when they come into view
 const observerOptions = {
     threshold: 0.1
@@ -46,6 +66,7 @@ document.querySelectorAll('.feature-card, .badge-icon').forEach(el => {
     observer.observe(el);
 });
 
+
 // Form submission handler
 document.querySelector('form').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -53,25 +74,8 @@ document.querySelector('form').addEventListener('submit', function(e) {
     this.reset();
 });
 
-// JavaScript para controlar o menu desktop
-document.getElementById('desktop-menu-button').addEventListener('click', function() {
-    const menu = document.getElementById('desktop-menu');
-    menu.classList.toggle('hidden');
-});
-
-// Fechar o menu quando clicar fora
-document.addEventListener('click', function(event) {
-    const menu = document.getElementById('desktop-menu');
-    const button = document.getElementById('desktop-menu-button');
-    
-    if (!menu.contains(event.target) && !button.contains(event.target)) {
-        menu.classList.add('hidden');
-    }
-});
-
 
 // JavaScript para pegar a localização atual e carregar o mapa
-
 let map;
             
 function ativarLoc() {
@@ -148,3 +152,48 @@ function ativarLoc() {
         alert("Seu navegador não suporta geolocalização. Por favor, atualize ou use outro navegador.");
     }
 }
+
+// Função para alternar entre modo claro e escuro
+function toggleDarkMode() {
+    // Verifica se o modo escuro está ativado
+    const isDarkMode = document.documentElement.classList.contains('dark');
+    
+    // Alterna a classe 'dark' no elemento html
+    document.documentElement.classList.toggle('dark');
+    
+    // Atualiza o ícone do botão
+    const themeIcon = document.getElementById('theme-icon');
+    if (isDarkMode) {
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+    } else {
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+    }
+    
+    // Salva a preferência no localStorage
+    localStorage.setItem('darkMode', !isDarkMode);
+}
+
+// Verifica a preferência do usuário ao carregar a página
+document.addEventListener('DOMContentLoaded', function() {
+    // Verifica o localStorage primeiro
+    const darkModePreference = localStorage.getItem('darkMode');
+    
+    // Verifica também a preferência do sistema
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    // Se houver preferência salva ou o sistema preferir modo escuro
+    if (darkModePreference === 'true' || (darkModePreference === null && prefersDarkScheme.matches)) {
+        document.documentElement.classList.add('dark');
+        const themeIcon = document.getElementById('theme-icon');
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+    }
+    
+    // Adiciona o evento de clique ao botão
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleDarkMode);
+    }
+});

@@ -600,3 +600,49 @@ function initPage() {
 
 // Inicializa a página quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', initPage);
+
+
+// Função para alternar entre modo claro e escuro
+function toggleDarkMode() {
+    // Verifica se o modo escuro está ativado
+    const isDarkMode = document.documentElement.classList.contains('dark');
+    
+    // Alterna a classe 'dark' no elemento html
+    document.documentElement.classList.toggle('dark');
+    
+    // Atualiza o ícone do botão
+    const themeIcon = document.getElementById('theme-icon');
+    if (isDarkMode) {
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+    } else {
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+    }
+    
+    // Salva a preferência no localStorage
+    localStorage.setItem('darkMode', !isDarkMode);
+}
+
+// Verifica a preferência do usuário ao carregar a página
+document.addEventListener('DOMContentLoaded', function() {
+    // Verifica o localStorage primeiro
+    const darkModePreference = localStorage.getItem('darkMode');
+    
+    // Verifica também a preferência do sistema
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    // Se houver preferência salva ou o sistema preferir modo escuro
+    if (darkModePreference === 'true' || (darkModePreference === null && prefersDarkScheme.matches)) {
+        document.documentElement.classList.add('dark');
+        const themeIcon = document.getElementById('theme-icon');
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+    }
+    
+    // Adiciona o evento de clique ao botão
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleDarkMode);
+    }
+});
