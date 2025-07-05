@@ -646,26 +646,3 @@ document.addEventListener('DOMContentLoaded', function() {
         themeToggle.addEventListener('click', toggleDarkMode);
     }
 });
-
-
-let deferredPrompt;
-
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault(); // Impede o comportamento automático
-  deferredPrompt = e; // Armazena o evento para uso futuro
-  document.querySelector('#install-button').style.display = 'inline-block';
-});
-
-document.getElementById('install-button').addEventListener('click', () => {
-  if (deferredPrompt) {
-    deferredPrompt.prompt(); // Mostra o prompt de instalação
-    deferredPrompt.userChoice.then((choiceResult) => {
-      if (choiceResult.outcome === 'accepted') {
-        console.log('Usuário aceitou a instalação 👍');
-      } else {
-        console.log('Usuário recusou a instalação 👎');
-      }
-      deferredPrompt = null;
-    });
-  }
-});
